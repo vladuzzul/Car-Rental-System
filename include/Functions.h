@@ -10,11 +10,11 @@ void clear(){
 }
 
 void WaitToReturn(){
-    int answer;
+    char answer;
     et:
     answer = 0;
     std::cout << "\nPress 1 to go back: "; cin >> answer;
-    if (answer != 1) goto et;
+    if (answer != '1') goto et;
     else return;
 }
 
