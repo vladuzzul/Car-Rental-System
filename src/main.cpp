@@ -4,6 +4,7 @@
 #include "../include/Customer.h"
 #include "../include/Functions.h"
 #include "../include/Rent.h"
+#include "../include/Settings.h"
 
 using namespace std;
 
@@ -12,9 +13,8 @@ int main(){
     vector<Customer> customers;
     initCars(cars);
     initCustomers(customers);
+    initSettings();
     int choice;
-    
-    string Firm_name = "Your";
     
     
     do{
@@ -177,10 +177,17 @@ int main(){
                     clear();
                     cout << Firm_name << " Settings\n\n";
                     cout << "1. Change Firm Name\n";
-                    cout << "2. Reset Database\n";
-                    cout << "3. Go back\n";
+                    cout << "2. Go back\n";
                     cout << "\nEnter your choice: "; cin >> suboption;
-                } while (suboption != 3);
+
+                    switch (suboption){
+                        case 1: { // Change name
+                            clear();
+                            changeFirmName();
+                            break;
+                        }
+                    }
+                } while (suboption != 2);
                 break;
             }
             case 5: {
