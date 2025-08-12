@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include "Classes.h"
+#include "Functions.h"
 
 void initCustomers(vector<Customer>& customers) {
     ifstream custin{"customers.txt", ios::in};
@@ -36,8 +37,8 @@ void saveCustomers(const vector<Customer>& customers) {
 void addCustomer(vector<Customer>& customers) {
     Customer customer;
     cout << "Enter customer name: "; cin.ignore(); getline(cin, customer.name);
-    cout << "Enter rented car ID (-1 if none): "; cin >> customer.rented_id;
     customers.push_back(customer);
+    saveCustomers(customers);
 }
 
 void viewCustomers(const vector<Customer>& customers) {
@@ -49,6 +50,7 @@ void viewCustomers(const vector<Customer>& customers) {
             cout << customer.name << " (No car rented)" << endl;
         }
     }
+    WaitToReturn();
 }
 
 void rentCar(vector<Customer>& customers, vector<Car>& cars){
@@ -71,5 +73,53 @@ void rentCar(vector<Customer>& customers, vector<Car>& cars){
     }
 }
 
+void searchCustomer(vector <Customer> customers, string name){
+    for (auto customer : customers){
+        if(equal_strings(customer.name, name)){
+            cout << "\nName: " << customer.name << "\n";
+            if (customer.rented_id != -1) {
+                cout << "Rented Car ID: " << customer.rented_id << "\n";
+            } else {
+                cout << "No car rented.\n";
+            }
+            WaitToReturn();
+            return;
+        }
+    }
+    cout << "Customer not found! \n";
+}
+
+void deleteCustomer(vector <Customer>& customers, string name){
+    for (auto it = customers.begin(); it <= customers.end(); ++it){
+        if(equal_strings(it->name, name)){
+            customers.erase(it);
+            saveCustomers(customers);
+            cout << "\nCustomer deleted succesfully!\n";
+            WaitToReturn();
+            return;
+        }
+    }
+    cout << "\nCustomer not found!\n";
+    WaitToReturn();
+    return;
+}
+
+void modifyCustomer(vector <Customer>& customers, string name){
+    for (auto it = customers.begin(); it <= customers.end(); ++it){
+        if(equal_strings(it->name, name)){
+            string new_name;
+            cout << "Enter the new name: "; 
+            getline(cin, new_name);
+            it -> name = new_name;
+            saveCustomers(customers);
+            cout << "\nCustomer modified succesfully!\n";
+            WaitToReturn();
+            return;
+        }
+    }
+    cout << "\nCustomer not found!\n";
+    WaitToReturn();
+    return;
+}
 
 #endif // CUSTOMER_H

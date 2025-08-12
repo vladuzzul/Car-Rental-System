@@ -11,6 +11,8 @@ class Car{
         int year = 0;
         string licensePlate = "Unknown";
         double pricePerDay = 0.0;
+        bool rented = false;
+        string rentedBy = "Not rented";
         
 };
 
@@ -19,13 +21,5 @@ class Customer{
         string name = "Unknown name";
         int rented_id = -1;
 };
-
-// Include other necessary headers here
-// #include "Car.h"
-// #include "Customer.h"
-// #include "Rental.h"
-// #include "RentalSystem.h"
-
-// Add any global constants, enums, or typedefs here
 
 #endif // CLASSES_H

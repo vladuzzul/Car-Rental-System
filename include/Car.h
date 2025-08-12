@@ -32,7 +32,20 @@ void initCars(vector<Car>& cars){
         car.licensePlate = line.substr(0, pos);
         line.erase(0, pos + 1);
         
-        car.pricePerDay = stod(line);
+        pos = line.find(',');
+        car.pricePerDay = stod(line.substr(0, pos));
+        line.erase(0, pos + 1);
+
+        pos = line.find(',');
+        if (line.substr(0, pos) == "1") {
+            car.rented = true;
+            line.erase(0, pos + 1);
+            car.rentedBy = line;
+        } else {
+            car.rented = false;
+            line.erase(0, pos + 1);
+            car.rentedBy = line;
+        }
         
         cars.push_back(car);
     }
@@ -47,7 +60,10 @@ void saveCars(const vector<Car>& cars){
                << car.model << "," 
                << car.year << "," 
                << car.licensePlate << "," 
-               << car.pricePerDay << endl;
+               << car.pricePerDay;
+        if (car.rented) carout << ",1," << car.rentedBy;
+        else carout << ",0,Not rented";
+        carout << endl;
     }
 }
 
@@ -69,7 +85,12 @@ void showCars(const vector<Car>& cars){
              << "\n\tModel: " << car.model 
              << "\n\tYear: " << car.year 
              << "\n\tLicense Plate: " << car.licensePlate 
-             << "\n\tPrice per Day: " << car.pricePerDay << "\n\n";
+             << "\n\tPrice per Day: " << car.pricePerDay;
+        if (car.rented){
+            cout << "\n\tStatus: Rented by " << car.rentedBy << "\n\n";
+        } else {
+            cout << "\n\tStatus: Available\n\n";
+        }
     }
     WaitToReturn();
 }
@@ -81,8 +102,13 @@ void searchCar(const vector<Car>& cars, int id){
                  << "\n\tModel: " << car.model 
                  << "\n\tYear: " << car.year 
                  << "\n\tLicense Plate: " << car.licensePlate 
-                 << "\n\tPrice per Day: " << car.pricePerDay << "\n\n";
-                 WaitToReturn();
+                 << "\n\tPrice per Day: " << car.pricePerDay;
+            if (car.rented){
+                cout << "\n\tStatus: Rented by " << car.rentedBy << "\n\n";
+            } else {
+                cout << "\n\tStatus: Available\n\n";
+            }
+            WaitToReturn();
             return;
         }
     }

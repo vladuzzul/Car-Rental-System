@@ -3,6 +3,7 @@
 #include "../include/Car.h"
 #include "../include/Customer.h"
 #include "../include/Functions.h"
+#include "../include/Rent.h"
 
 using namespace std;
 
@@ -12,9 +13,9 @@ int main(){
     initCars(cars);
     initCustomers(customers);
     int choice;
-
+    
     string Firm_name = "Your";
-
+    
     
     do{
         clear();
@@ -36,9 +37,49 @@ int main(){
                     cout << "2. Add Customer\n";
                     cout << "3. Remove Customer\n";
                     cout << "4. Edit Customer\n";
-                    cout << "5. Search Cusotmer\n";
+                    cout << "5. Search Customer\n";
                     cout << "6. Go Back\n";
                     cout << "\nEnter your choice: "; cin >> suboption; 
+
+                    switch(suboption){
+                        case 1: { //View Customers
+                            clear();
+                            viewCustomers(customers);
+                            break;
+                        } 
+                        case 2: { // Add Customer
+                            clear();
+                            addCustomer(customers);
+                            break;
+                        }
+                        case 3: { // Remove Customer
+                            clear();
+                            string name;
+                            cout << "Enter the customer's name you want to delete: "; 
+                            cin.ignore();
+                            getline(cin, name);
+                            deleteCustomer(customers, name);
+                            break;
+                        }
+                        case 4: { // Edit Customer
+                            clear();
+                            string name;
+                            cout << "Enter the customer's name you want to modify: ";
+                            cin.ignore();
+                            getline(cin, name);
+                            modifyCustomer(customers, name);
+                            break;
+                        }
+                        case 5: { // Search Customer
+                            clear();
+                            string name;
+                            cout << "Enter customer name: "; 
+                            cin.ignore();
+                            getline(cin, name);
+                            searchCustomer(customers, name);
+                            break;
+                        }
+                    }
                 } while (suboption != 6);
                 break;
             }
@@ -100,10 +141,38 @@ int main(){
                     cout << "2. Return Car\n";
                     cout << "3. Go Back\n";
                     cout << "\n Enter your choice: "; cin >> suboption;
+
+                    switch (suboption){
+                        case 1: { // Rent Car
+                            clear();
+                            string name;
+                            int id;
+                            em:
+                            cout << "Enter car ID to rent: "; cin >> id;
+                            if (id < 0) {
+                                cout << "\nInvalid car ID, try again.\n\n";
+                                goto em;
+                            }
+                            cout << "Enter the customer name who is renting the car: ";
+                            cin.ignore();
+                            getline(cin, name);
+                            rentCar(customers, cars, name, id);
+                            break;
+                        }
+                        case 2: { // Return Car
+                            clear();
+                            string name;
+                            cout << "Enter the customer name who is returning the car: ";
+                            cin.ignore();
+                            getline(cin, name);
+                            returnCar(customers, cars, name);
+                            break;
+                        }
+                    }
                 } while (suboption != 3);
                 break;
             }
-            case 4: {
+            case 4: { // Settings not functional yet
                 do{
                     clear();
                     cout << Firm_name << " Settings\n\n";
