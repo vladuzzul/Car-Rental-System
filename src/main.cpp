@@ -177,7 +177,8 @@ int main(){
                     clear();
                     cout << Firm_name << " Settings\n\n";
                     cout << "1. Change Firm Name\n";
-                    cout << "2. Go back\n";
+                    cout << "2. Reset Settings\n";
+                    cout << "3. Go Back\n";
                     cout << "\nEnter your choice: "; cin >> suboption;
 
                     switch (suboption){
@@ -186,8 +187,24 @@ int main(){
                             changeFirmName();
                             break;
                         }
+                        case 2: { // Reset Settings
+                            clear();
+                            cout << "Are you sure you want to reset settings? (y/n): ";
+                            char confirm;
+                            cin >> confirm;
+                            if (confirm == 'y' || confirm == 'Y') {
+                                remove("settings.txt");
+                                Firm_name = "Your firm's";
+                                saveSettings();
+                                cout << "\nSettings reset successfully!" << endl;
+                            } else {
+                                cout << "\nSettings reset cancelled." << endl;
+                            }
+                            WaitToReturn();
+                            break;
+                        }
                     }
-                } while (suboption != 2);
+                } while (suboption != 3);
                 break;
             }
             case 5: {
