@@ -5,6 +5,7 @@
 #include "../include/Functions.h"
 #include "../include/Rent.h"
 #include "../include/Settings.h"
+#include "../include/Menus.h"
 
 using namespace std;
 
@@ -14,34 +15,16 @@ int main(){
     initCars(cars);
     initCustomers(customers);
     initSettings();
-    int choice;
+    int choice = 0;
     
     
-    do{
-        clear();
-        cout << Firm_name << " Car Rental Management System\n\n";
-        cout << "1. Customer Manager\n";
-        cout << "2. Car Management\n";
-        cout << "3. Rental Management\n";
-        cout << "4. Settings\n";
-        cout << "5. Exit\n";
-        cout << "\nEnter your choice: "; cin >> choice;
-        
-        int suboption;
-        switch(choice){
+    while (choice != 5){
+        back:
+        switch(mainMenu()){
             case 1: {
-                do{
-                    clear();
-                    cout << Firm_name << " Customer Management\n\n";
-                    cout << "1. View Customers\n";
-                    cout << "2. Add Customer\n";
-                    cout << "3. Remove Customer\n";
-                    cout << "4. Edit Customer\n";
-                    cout << "5. Search Customer\n";
-                    cout << "6. Go Back\n";
-                    cout << "\nEnter your choice: "; cin >> suboption; 
-
-                    switch(suboption){
+                int suboption;
+                while (suboption != 6){
+                    switch(customerMenu()){
                         case 1: { //View Customers
                             clear();
                             viewCustomers(customers);
@@ -79,24 +62,20 @@ int main(){
                             searchCustomer(customers, name);
                             break;
                         }
+                        case 6:{ // Go Back
+                            goto back;
+                            break;
+                        }
                     }
-                } while (suboption != 6);
+                }
                 break;
             }
             case 2: {
-                do{
+                int suboption;
+                while (suboption != 6){
                     //Fully Functional
-                    clear();
-                    cout << Firm_name << " Car Management\n\n";
-                    cout << "1. View Cars\n";
-                    cout << "2. Add Car\n";
-                    cout << "3. Remove Car\n";
-                    cout << "4. Edit Car Price\n";
-                    cout << "5. Search Car\n";
-                    cout << "6. Go Back\n";
-                    cout << "\nEnter your choice: "; cin >> suboption;
                     
-                    switch(suboption){
+                    switch(carMenu()){
                         case 1: {
                             clear();
                             showCars(cars);
@@ -128,21 +107,20 @@ int main(){
                             searchCar(cars, id);
                             break;
                         }
+                        case 6: {
+                            goto back;
+                            break;
+                        }
                     }
 
-                } while (suboption != 6);
+                } 
                 break;
             }
             case 3: {
-                do{
-                    clear();
-                    cout << Firm_name << " Rental Management\n\n";
-                    cout << "1. Rent Car\n";
-                    cout << "2. Return Car\n";
-                    cout << "3. Go Back\n";
-                    cout << "\n Enter your choice: "; cin >> suboption;
+                int suboption;
+                while (suboption != 3){
 
-                    switch (suboption){
+                    switch (rentalMenu()){
                         case 1: { // Rent Car
                             clear();
                             string name;
@@ -168,20 +146,19 @@ int main(){
                             returnCar(customers, cars, name);
                             break;
                         }
+                        case 3: { // Go Back
+                            goto back;
+                            break;
+                        }
                     }
-                } while (suboption != 3);
+                } 
                 break;
             }
-            case 4: { // Settings not functional yet
-                do{
-                    clear();
-                    cout << Firm_name << " Settings\n\n";
-                    cout << "1. Change Firm Name\n";
-                    cout << "2. Reset Settings\n";
-                    cout << "3. Go Back\n";
-                    cout << "\nEnter your choice: "; cin >> suboption;
-
-                    switch (suboption){
+            case 4: { 
+                int suboption;
+                while (suboption != 3){
+                    
+                    switch (settingsMenu()){
                         case 1: { // Change name
                             clear();
                             changeFirmName();
@@ -203,8 +180,12 @@ int main(){
                             WaitToReturn();
                             break;
                         }
+                        case 3: { // Go Back
+                            goto back;
+                            break;
+                        }
                     }
-                } while (suboption != 3);
+                } 
                 break;
             }
             case 5: {
@@ -214,5 +195,5 @@ int main(){
                 break;
             } 
         }
-    } while (choice != 5);
+    } 
 }

@@ -1,1 +1,2 @@
 1,BMW M4CS,2024,SMOKEDX,1199.99,0,Not rented
+2,Alfa Romeo Giulia,2016,smkd,499.99,1,Vlad Cozma
