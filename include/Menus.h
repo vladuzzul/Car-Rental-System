@@ -10,7 +10,7 @@ int mainMenu(){
     clear();
     int choice;
     cout << Firm_name << " Car Rental Management System\n\n";
-    cout << "1. Customer Manager\n";
+    cout << "1. Customer Management\n";
     cout << "2. Car Management\n";
     cout << "3. Rental Management\n";
     cout << "4. Settings\n";
