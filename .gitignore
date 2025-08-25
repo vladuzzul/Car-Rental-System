@@ -1,4 +1,4 @@
 /src/main
-*txt
+/src/*txt
 to_do.todo
 /build
